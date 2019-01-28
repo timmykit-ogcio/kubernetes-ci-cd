@@ -26,7 +26,7 @@ spec:
               path: .docker/config.json
 """
   )
-
+{
 node {
 
     checkout scm
@@ -41,7 +41,7 @@ node {
     imageName = "${registryHost}${appName}:${tag}"
     env.BUILDIMG=imageName
 
-    stage "Build"
+    stage "Build" {
     
 //        sh "docker build -t ${imageName} -f applications/hello-kenzan/Dockerfile applications/hello-kenzan"
       git 'https://github.com/jenkinsci/docker-jnlp-slave.git'
@@ -52,7 +52,8 @@ node {
             '''
           }       
         }
-    
+    }   
+
     stage "Push"
 
         sh "docker push ${imageName}"
@@ -61,4 +62,5 @@ node {
 
         kubernetesDeploy configs: "applications/${appName}/k8s/*.yaml", kubeconfigId: 'kenzan_kubeconfig'
 
+}
 }
