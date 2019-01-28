@@ -45,9 +45,9 @@ node {
     
 //        sh "docker build -t ${imageName} -f applications/hello-kenzan/Dockerfile applications/hello-kenzan"
 container(name: 'kaniko', shell: '/busybox/sh') {
-        sh "#!/busybox/sh
+        sh '''#!/busybox/sh
            /kaniko/executor -f `pwd`/applications/hello-kenzan/Dockerfile -c `pwd` applications/hello-kenzan --insecure-skip-tls-verify --destination=mydockerregistry:5000/myorg/myimage
-           "
+           '''
        }
     
     stage "Push"
