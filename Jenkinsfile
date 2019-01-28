@@ -1,6 +1,6 @@
  def label = "kaniko-${UUID.randomUUID().toString()}"
  
- podTemplate(name: 'kaniko', label: label, yaml: "
+ podTemplate(name: 'kaniko', label: label, yaml: """
 kind: Pod
 metadata:
   name: kaniko
@@ -24,7 +24,7 @@ spec:
           items:
             - key: .dockerconfigjson
               path: .docker/config.json
-"
+"""
   )
 
 node {
